@@ -1,0 +1,13 @@
+name: Workflow-dir
+on: push
+jobs:
+  show-dir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show data
+        run: |
+          pwd
+          ls -a
+          echo "${{ github.sha }}"
+          echo "${{ github.repository }}"
+          echo "${{ github.workspace }}"
