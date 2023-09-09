@@ -1,9 +1,15 @@
 name: Workflow-dir
 on: push
+defaults:
+  run:
+    shell: bash
+    # working-directory: /dev/
 jobs:
   show-dir:
     runs-on: ubuntu-latest
     steps:
+      - name: copy files in the machine
+        uses: actions/checkout@v4
       - name: Show data
         run: |
           pwd
@@ -12,3 +18,11 @@ jobs:
           echo "${{ github.repository }}"
           echo "${{ github.workspace }}"
           echo "${{ toJson(github) }}"
+      - name: Change working directory
+        working-directory: /dev/
+        run: pwd
+      - name: Python shell
+        shell: python
+        run: |
+          import platform
+          print("[platfor]", platform.processor())
