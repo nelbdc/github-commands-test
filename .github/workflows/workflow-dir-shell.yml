@@ -11,3 +11,4 @@ jobs:
           echo "${{ github.sha }}"
           echo "${{ github.repository }}"
           echo "${{ github.workspace }}"
+          echo "${{ toJson(github) }}"
