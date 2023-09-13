@@ -1,0 +1,16 @@
+name: Events
+on:
+  push:
+    branches: main
+  issues:
+  pull_request:
+jobs:
+  push_event:
+    runs-on: ubuntu-latest
+    name: push_event
+    steps:
+      - name: Echo
+        run: |
+          echo "${{ github.sha }}"
+          echo "${{ github.ref }}"
+          echo "${{ github.repository }}"
