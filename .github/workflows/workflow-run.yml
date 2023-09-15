@@ -1,0 +1,12 @@
+name: Workflow run
+on:
+  workflow_run:
+    workflows: [Events]
+    types: [completed]
+
+jobs:
+  workflow-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: this proccess is after workflow event
+        run: echo "Hello"
