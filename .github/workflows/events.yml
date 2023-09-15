@@ -3,7 +3,9 @@ on:
   push:
     branches: main
   issues:
+    types: [assigned, closed, opened, reopened]
   pull_request:
+    types: [assigned, synchronize, reopened, opened, closed]
 jobs:
   push_event:
     runs-on: ubuntu-latest
