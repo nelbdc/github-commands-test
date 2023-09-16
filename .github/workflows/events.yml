@@ -1,7 +1,8 @@
 name: Events
 on:
   push:
-    branches: main
+    paths:
+      - "**.js"
   issues:
     types: [assigned, closed, opened, reopened]
   pull_request:

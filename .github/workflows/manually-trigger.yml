@@ -1,0 +1,8 @@
+name: Manually Triggered
+on:
+  workflow_dispatch:
+jobs:
+  manually-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is a event trigger manually"
