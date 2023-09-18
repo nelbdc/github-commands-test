@@ -19,6 +19,7 @@ jobs:
           echo "${{ github.action }}"
       - name: Dump context
         run: |
+          echo "${{ github.event.issue.labels }}"
           echo "${{ toJson(job) }}"
           echo "${{ toJson(secrets) }}"
           echo "${{ toJson(steps) }}"
