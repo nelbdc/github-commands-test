@@ -9,7 +9,7 @@ jobs:
         id: expressions
         run: |
           echo "${{ toJson(github) }}"
-      - name: "Dump context"
+      - name: Dump context
         run: |
           echo "${{ toJson(job) }}"
           echo "${{ toJson(secrets) }}"
