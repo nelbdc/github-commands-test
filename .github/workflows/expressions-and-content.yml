@@ -3,10 +3,10 @@ on: [push, pull_request, issues, workflow_dispatch]
 jobs:
   run-on-issues-and-prs:
     runs-on: ubuntu-latest
-    if: contains('["issues","pull_request"]',github.event_name)
+    if: contains(fromJson('["issues","pull_request"]'),github.event_name)
     steps:
       - name: Runs only if issue has a bug label
-        if: contains(github.event.issue.labels.*.name,'bug')
+        if: contains(github.event.issue.labels.*.name, 'bug')
         run: echo ${{ join(github.event.issue.labels.*.name,', ') }}
 
   expressions-and-context:
