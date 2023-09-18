@@ -8,7 +8,7 @@ jobs:
       - name: Expressions
         id: expressions
         run: |
-          echo "${{ toJson(github) }}"
+          echo "${{ github.action }}"
       - name: Dump context
         run: |
           echo "${{ toJson(job) }}"
