@@ -5,6 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Expressions & context
     steps:
+      - name: Expressions
+        id: expressions
+        run: |
+          echo "${{ toJson(github) }}"
       - name: "Dump context"
         run: |
           echo "${{ toJson(job) }}"
