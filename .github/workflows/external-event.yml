@@ -1,0 +1,10 @@
+name: Externals Event
+on:
+  push:
+    branches: master
+jobs:
+  external-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Github contents
+        run: echo ${{ github.event.client_payload.env }}
