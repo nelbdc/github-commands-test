@@ -30,4 +30,5 @@ jobs:
           echo ${{ env.end-vars-and-context }}
           echo ${{ env.in_steps }}
           echo ${{ vars.VARIABLE_GITHUB }}
-          echo ${{ env.context_overwrite }}
+          echo $context_overwrite
+          echo $NEW_ENV_VAR
