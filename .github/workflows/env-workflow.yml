@@ -15,11 +15,19 @@ jobs:
     steps:
       - name: Logs ENV VAR
         run: echo $GITHUB_REF
-      - name: Set env var
+      - name: Set env var or you could overwrite it too
         run: |
           echo "This is the value before overwrite it: ${{ env.context_overwrite }}"
           echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
           echo "context_overwrite=$RANDOM" >> "$GITHUB_ENV"
+      - name: Multiline ENV Var
+        run: |
+          DELIMITER=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "RANDOM_JOKE<<$DELIMITER" >> "$GITHUB_ENV"
+          echo "Here is a joke: " >> "$GITHUB_ENV"
+          curl -s https://icanhazdadjoke.com/ >> "$GITHUB_ENV"
+          echo "" >> "$GITHUB_ENV"
+          echo "$DELIMITER" >> "$GITHUB_ENV"
       - name: Log context
         id: log_context
         env:
