@@ -8,12 +8,18 @@ jobs:
   end-vars-and-context:
     env:
       end-vars-and-context: Only available to this job
+      context_overwrite: Only available to this job
     environment: production
     runs-on: ubuntu-latest
     #if: github.ref == 'ref/heads/main'
     steps:
       - name: Logs ENV VAR
         run: echo $GITHUB_REF
+      - name: Set env var
+        run: |
+          echo "This is the value before overwrite it: ${{ env.context_overwrite }}"
+          echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
+          echo "context_overwrite=$RANDOM" >> "GITHUB_ENV"
       - name: Log context
         id: log_context
         env:
@@ -23,4 +29,5 @@ jobs:
           echo ${{ env.WF_LEVEL }}
           echo ${{ env.end-vars-and-context }}
           echo ${{ env.in_steps }}
-          echo ${{ env.VARIABLE_GITHUB }}
+          echo ${{ vars.VARIABLE_GITHUB }}
+          echo ${{ env.context_overwrite }}
