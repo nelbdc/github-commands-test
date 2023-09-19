@@ -10,7 +10,7 @@ jobs:
       end-vars-and-context: Only available to this job
     environment: production
     runs-on: ubuntu-latest
-    if: github.ref == 'ref/heads/main'
+    #if: github.ref == 'ref/heads/main'
     steps:
       - name: Logs ENV VAR
         run: echo $GITHUB_REF
