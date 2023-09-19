@@ -1,0 +1,26 @@
+name: Enviroment Workflow
+on: push
+
+env:
+  WF_LEVEL: Available to all jobs
+
+jobs:
+  end-vars-and-context:
+    env:
+      end-vars-and-context: Only available to this job
+    environment: production
+    runs-on: ubuntu-latest
+    if: github.ref == 'ref/heads/main'
+    steps:
+      - name: Logs ENV VAR
+        run: echo $GITHUB_REF
+      - name: Log context
+        id: log_context
+        env:
+          in_steps: Available only in this steps
+        run: |
+          echo ${{ github.ref }}
+          echo ${{ env.WF_LEVEL }}
+          echo ${{ env.end-vars-and-context }}
+          echo ${{ env.in_steps }}
+          echo ${{ env.VARIABLE_GITHUB }}

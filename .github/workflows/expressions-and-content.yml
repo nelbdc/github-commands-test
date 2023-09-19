@@ -8,6 +8,9 @@ jobs:
       - name: Runs only if issue has a bug label
         if: contains(github.event.issue.labels.*.name, 'bug')
         run: echo ${{ join(github.event.issue.labels.*.name,', ') }}
+      - name: Runs only if pr has a bug label
+        if: contains(github.event.pull_request.labels.*.name,'bug')
+        run: echo ${{ join(github.event.issue.labels.*.name,', ') }}
 
   expressions-and-context:
     runs-on: ubuntu-latest
