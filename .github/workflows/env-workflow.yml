@@ -19,7 +19,7 @@ jobs:
         run: |
           echo "This is the value before overwrite it: ${{ env.context_overwrite }}"
           echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
-          echo "context_overwrite=$RANDOM" >> "GITHUB_ENV"
+          echo "context_overwrite=$RANDOM" >> "$GITHUB_ENV"
       - name: Log context
         id: log_context
         env:
