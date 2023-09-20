@@ -2,9 +2,15 @@ name: Pull Request Comment
 on:
   pull_request_target:
     types: [opened]
+# permissions: # se puede definir a nivel de workflow
+#   issues: read
 jobs:
   pull-reauest-target:
     runs-on: ubuntu-latest
+    permissions: # permission for scope
+      issues: write
+      contents: read
+    # permissions: read-all # permission for all scope in this case only read but too can be write
     steps:
       - name: Comment on new PRs
         uses: actions/github-script@v6
