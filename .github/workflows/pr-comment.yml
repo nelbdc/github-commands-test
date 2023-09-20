@@ -10,6 +10,7 @@ jobs:
     permissions: # permission for scope
       issues: write
       contents: read
+      pull-requests: write
     # permissions: read-all # permission for all scope in this case only read but too can be write
     steps:
       - name: Comment on new PRs
