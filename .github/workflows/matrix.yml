@@ -22,7 +22,7 @@ jobs:
           - os: ubuntu-lastest
             node-version: 17
         exclude:
-          - os: ubuntu-lastest
+          - os: ubuntu-latest
             node-version: 14
       fail-fast: true
       max-parallel: 3
