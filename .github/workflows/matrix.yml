@@ -19,8 +19,7 @@ jobs:
         with:
           script: |
             const inputs = ${{inputs}}
-            const os = inputs.string.split(",");
-            console.log(os)
+            console.log(inputs)
 
   node-matrix:
     if: false
