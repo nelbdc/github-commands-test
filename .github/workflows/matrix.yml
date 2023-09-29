@@ -19,17 +19,16 @@ jobs:
           script: |
             return {'os': context.payload.inputs['os'].split(','),'node-version': context.payload.inputs['node-version'].split(',') }
           result-encoding: json
-      - name: variable 1
-        id: os
-        run: echo "os=${{ steps.set-matrix.outputs.result['os'] }}" >> "$GITHUB_OUTPUT"
-      - name: variable 2
-        id: node-version
-        run: echo "'node-version'=${{ steps.set-matrix.outputs.result['node-version'] }}" >> "$GITHUB_OUTPUT"
+      # - name: variable 1
+      #   id: os
+      #   run: echo "os=${{ steps.set-matrix.outputs.result['os'] }}" >> "$GITHUB_OUTPUT"
+      # - name: variable 2
+      #   id: node-version
+      #   run: echo "'node-version'=${{ steps.set-matrix.outputs.result['node-version'] }}" >> "$GITHUB_OUTPUT"
 
       - name: show-variables
         run: |
-          echo "${{ steps.node-version.outputs }}"
-          echo "${{ steps.os.outputs }}"
+          echo "${{ toJson(steps.set-matrix.outputs.result ) }}"
 
   node-matrix:
     if: false
