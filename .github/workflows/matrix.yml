@@ -28,8 +28,8 @@ jobs:
 
       - name: show-variables
         run: |
-          echo "${{ steps.os.outputs }}"
-          echo "${{ steps.node-version.outputs }}"
+          echo "${{ toJson(steps.os.outputs ) }}"
+          echo "${{ toJson(steps.node-version.outputs) }}"
 
   node-matrix:
     if: false
