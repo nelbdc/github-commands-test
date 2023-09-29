@@ -18,6 +18,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const inputs = ${{inputs}}
             const os = inputs.string.split(",");
             console.log(os)
 
