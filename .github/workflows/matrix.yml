@@ -16,8 +16,8 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const inputs = ${{inputs}}
-            console.log(inputs.os)
+            const inputs = ${{inputs}};
+            console.log(${{ fromJson(inputs) }})
 
   # const os = inputs.string.split(",");
 
