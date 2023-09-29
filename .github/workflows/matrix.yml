@@ -11,6 +11,8 @@ on:
 jobs:
   set-matrix:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.result }}
     steps:
       - name: set matrix
         id: set-matrix
@@ -26,17 +28,12 @@ jobs:
         id: node-version
         run: echo "'node-version'=${{ toJson(steps.set-matrix.outputs.result)['node-version'] }}" >> "$GITHUB_OUTPUT"
 
-      - name: show-variables
-        run: |
-          echo "${{ toJson(steps.os.outputs ) }}"
-          echo "${{ toJson(steps.node-version.outputs) }}"
-
   node-matrix:
-    if: false
+    needs: [set-matrix]
     strategy:
       matrix:
-        os: ${{ join(inputs.string) }}
-        node-version: [14, 15, 16]
+        os: ${{ fromJson(needs.set-matrix.outputs.matrix).os}}
+        node-version: ${{ fromJson(needs.set-matrix.outputs.matrix).node-version}}
         include:
           - os: ubuntu-lastest
             is-ubuntu: true
