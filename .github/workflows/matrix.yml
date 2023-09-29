@@ -5,21 +5,31 @@ on:
       os:
         type: string
         default: "ubuntu-latest,windows-latest"
+      node-version:
+        type: string
+        default: "14,15,16"
 jobs:
   set-matrix:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: null
     steps:
       - name: set matrix
         id: set-matrix
         uses: actions/github-script@v6
         with:
           script: |
-            const inputs = ${{inputs}};
-            console.log(${{ fromJson(inputs) }})
+            return {'os': context.payload.inputs['os'].split(','),'node-version': context.payload.inputs['node-version'].split(',') }
+          result-encoding: json
+      - name: variable 1
+        id: os
+        run: echo "os=${{ steps.set-matrix.outputs.result['os'] }}" >> "$GITHUB_OUTPUT"
+      - name: variable 2
+        id: node-version
+        run: echo "'node-version'=${{ steps.set-matrix.outputs.result['node-version'] }}" >> "$GITHUB_OUTPUT"
 
-  # const os = inputs.string.split(",");
+      - name: show-variables
+        run: |
+          echo "${{ steps.node-version.outputs }}"
+          echo "${{ steps.os.outputs }}"
 
   node-matrix:
     if: false
