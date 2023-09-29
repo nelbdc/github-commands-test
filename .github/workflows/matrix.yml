@@ -1,12 +1,31 @@
 name: Matrix
-on: push
-
+on:
+  push:
+    branches: main
+  workflow_dispatch:
+    inputs:
+      string:
+        type: string
+        default: "ubuntu-latest,windows-latest"
 jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: null
+    steps:
+      - name: set matrix
+        id: set-matrix
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const os = ${{inputs.string}}.split(",")
+            console.log(os)
+
   node-matrix:
-    continue-on-error: false
+    if: false
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: ${{ join(inputs.string) }}
         node-version: [14, 15, 16]
         include:
           - os: ubuntu-lastest
@@ -26,6 +45,7 @@ jobs:
             node-version: 14
       fail-fast: true
       max-parallel: 3
+    continue-on-error: ${{ matrix.experimental == true }}
     runs-on: ${{ matrix.os }}
     steps:
       - if: matrix.experimental == true
