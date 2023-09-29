@@ -1,10 +1,8 @@
 name: Matrix
 on:
-  push:
-    branches: main
   workflow_dispatch:
     inputs:
-      string:
+      os:
         type: string
         default: "ubuntu-latest,windows-latest"
 jobs:
@@ -19,7 +17,9 @@ jobs:
         with:
           script: |
             const inputs = ${{inputs}}
-            console.log(inputs)
+            console.log(inputs.os)
+
+  # const os = inputs.string.split(",");
 
   node-matrix:
     if: false
