@@ -1,5 +1,6 @@
 name: Docker github actions
 on: push
+
 env:
   cache-name: "cache-node-modules"
   MONGODB_CONNECTION_PROTOCOL: mongodb
@@ -10,6 +11,7 @@ env:
 jobs:
   docker-actions:
     runs-on: ubuntu-latest
+    environment: production
     container:
       image: node
       ports:
@@ -72,6 +74,7 @@ jobs:
           SLACK_COLOR: "#efefef"
   push-to-dockerhub-and-ghcr:
     runs-on: ubuntu-latest
+    environment: production
     permissions:
       packages: write
       contents: read
