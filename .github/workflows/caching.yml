@@ -31,6 +31,14 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: artifact
-          path: ${{ github.workspace }}
+          path: app.js
           retention-days: 1
-          if-no-files-found: warning
+          if-no-files-found: warn
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: artifact
+          path: resulst
+      - run: ls -a
+      - run: ls -a
+        working-directory: resulst
