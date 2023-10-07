@@ -6,7 +6,7 @@ jobs:
   docker-actions:
     runs-on: ubuntu-latest
     container:
-      image: Dockerfile
+      image: node
     steps:
       - name: Logs Node
         run: |
