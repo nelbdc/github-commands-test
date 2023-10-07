@@ -58,11 +58,6 @@ jobs:
         with:
           entrypoint: /usr/local/bin/node
           args: -v
-      - name: Container in step 3
-        uses: docker://node
-        with:
-          entrypoint: cat
-          args: text.txt
       - name: Container in step 4
         uses: docker://node
         with:
