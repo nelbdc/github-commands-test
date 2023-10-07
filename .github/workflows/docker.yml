@@ -1,0 +1,15 @@
+name: Docker github actions
+on: push
+jobs:
+  docker-actions:
+    runs-on: ubuntu-latest
+    container:
+      image: Dockerfile
+    steps:
+      - name: Logs Node
+        run: |
+          echo node -v
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Test
+        run: npm test

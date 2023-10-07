@@ -1,5 +1,6 @@
-const { fetch } = require("./app");
+const fetch = require("./app");
 
-test("adds 1 + 2 to equal 3", async () => {
-    expect(typeof await fetch()["id"]).toBe(String);
+test("is string", async () => {
+    const string = await fetch();
+    expect(typeof string["id"]).toBe(typeof "");
 });

@@ -4,7 +4,4 @@ async function fetch() {
     return res.data;
 }
 
-
-export {
-    fetch
-}
+module.exports = fetch;
