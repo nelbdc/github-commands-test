@@ -1,5 +1,7 @@
 name: Docker github actions
 on: push
+env:
+  cache-name: "cache-node-modules"
 jobs:
   docker-actions:
     runs-on: ubuntu-latest
@@ -11,5 +13,16 @@ jobs:
           echo node -v
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Dependencies
+        run: npm ci
       - name: Test
         run: npm test
