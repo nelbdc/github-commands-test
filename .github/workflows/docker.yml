@@ -2,11 +2,27 @@ name: Docker github actions
 on: push
 env:
   cache-name: "cache-node-modules"
+  MONGODB_CONNECTION_PROTOCOL: mongodb+srv
+  MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
+  MONGODB_USERNAME: root
+  MONGODB_PASSWORD: example
 jobs:
   docker-actions:
     runs-on: ubuntu-latest
     container:
       image: node
+      ports:
+        - 80
+      env:
+        ENV_PATH: "path-test"
+    services:
+      mongo:
+        image: mongo
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+        ports:
+          - 27017:27017
     steps:
       - name: Logs Node
         run: |
@@ -26,3 +42,5 @@ jobs:
         run: npm ci
       - name: Test
         run: npm test
+      - name: npm start
+        run: npm start
