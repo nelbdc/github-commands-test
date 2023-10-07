@@ -14,10 +14,15 @@ on:
         required: false
         type: boolean
         default: true
+    outputs:
+      value:
+        value: ${{ jobs.reusable.outputs.value  }}
 
 jobs:
   reusable:
     runs-on: ubuntu-latest
+    outputs:
+      value: ${{ steps.output-step.outcome.output-step }}
     steps:
       - name: run-name
         run: |
@@ -28,3 +33,6 @@ jobs:
         if: inputs.executed
         run: |
           echo "This is a opcioanal steps"
+      - name: outputs
+        id: output-step
+        run: echo "output-step=success" >> $GITHUB_OUTPUT

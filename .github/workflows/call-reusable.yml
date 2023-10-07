@@ -6,9 +6,16 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
-      - name: call reusable workflow
-        uses: ./.github/workflows/reusable.yml
-        with:
-          name: "Nelson"
-          secrets: "secret"
-          executed: true
+  call-reusable-workflow:
+    uses: ./.github/workflows/reusable.yml
+    with:
+      name: "Nelson"
+      secrets: "secret"
+      executed: true
+  use-output:
+    needs: call-reusable-workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: show
+        run: |
+          echo "${{ needs.call-reusable-workflow.outputs.value }}"
