@@ -16,7 +16,7 @@ on:
         default: true
     outputs:
       value:
-        value: ${{ jobs.reusable.outputs.value  }}
+        value: ${{ jobs.nested-workflow-call.outputs.outcome  }}
         description: This is a output
     secrets:
       any-secret:
@@ -24,20 +24,9 @@ on:
         description: This is a secret
 
 jobs:
-  reusable:
-    runs-on: ubuntu-latest
-    outputs:
-      value: ${{ steps.output-step.outputs.output-step }}
-    steps:
-      - name: run-name
-        run: |
-          echo "This workflow has been executed by: ${{ inputs.name }}"
-          echo "Secret: ${{ inputs.secrets }}"
-          echo "Next actions: ${{ inputs.executed }}"
-      - name: Optional
-        if: inputs.executed
-        run: |
-          echo "This is a opcioanal steps"
-      - name: outputs-value
-        id: output-step
-        run: echo "output-step='success'" >> $GITHUB_OUTPUT
+  nested-workflow-call:
+    uses: ./.github/workflows/reusable-output.yml
+    with:
+      secrets: ${{ inputs.secrets }}
+      executed: ${{ inputs.executed }}
+      name: ${{ inputs.name }}

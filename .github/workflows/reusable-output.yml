@@ -1,0 +1,34 @@
+name: Reusable output
+on:
+  workflow_call:
+    inputs:
+      secrets:
+        required: true
+        type: string
+      name:
+        required: false
+        type: string
+      executed:
+        required: false
+        type: boolean
+    outputs:
+      outcome:
+        value: ${{ jobs.reusable.outputs.value }}
+jobs:
+  reusable:
+    runs-on: ubuntu-latest
+    outputs:
+      value: ${{ steps.output-step.outputs.output-step }}
+    steps:
+      - name: run-name
+        run: |
+          echo "This workflow has been executed by: ${{ inputs.name }}"
+          echo "Secret: ${{ inputs.secrets }}"
+          echo "Next actions: ${{ inputs.executed }}"
+      - name: Optional
+        if: inputs.executed
+        run: |
+          echo "This is a opcioanal steps"
+      - name: outputs-value
+        id: output-step
+        run: echo "output-step='success'" >> $GITHUB_OUTPUT
