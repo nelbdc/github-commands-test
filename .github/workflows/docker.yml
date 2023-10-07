@@ -28,6 +28,8 @@ jobs:
       - name: Logs Node
         run: |
           echo node -v
+      - name: create-file
+        run: echo "text" >> text.txt
       - name: Checkout
         uses: actions/checkout@v3
       - name: Cache
@@ -56,3 +58,8 @@ jobs:
         with:
           entrypoint: /usr/local/bin/node
           args: -v
+      - name: Container in step 2
+        uses: docker://node
+        with:
+          entrypoint: cat
+          args: text.txt
