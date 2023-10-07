@@ -29,7 +29,7 @@ jobs:
         run: |
           echo node -v
       - name: create-file
-        run: echo "text" >> text.txt
+        run: echo "text" > text.txt
       - name: Checkout
         uses: actions/checkout@v3
       - name: Cache
@@ -58,13 +58,20 @@ jobs:
         with:
           entrypoint: /usr/local/bin/node
           args: -v
-      - name: Container in step 2
+      - name: Container in step 3
         uses: docker://node
         with:
           entrypoint: cat
           args: text.txt
-      - name: Container in step 3
+      - name: Container in step 4
         uses: docker://node
         with:
           entrypoint: ./script.sh
           args: "args test"
+      - name: Send Message
+        uses: docker://technosophos/slack-notify
+        env:
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK_URL  }}
+          SLACK_TITLE: "Hello World"
+          SLACK_MESSAGE: "Today is a fine day"
+          SLACK_COLOR: "#efefef"
