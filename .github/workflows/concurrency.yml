@@ -1,0 +1,19 @@
+name: Concurrency
+run-name: concurrency (${{ inputs.env }})
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: environment
+        required: true
+
+concurrency:
+  group: ${{github.workflow}}-${{ github.event.inputs.env }}
+  cancel-in-progress: true
+
+jobs:
+  sleep:
+    runs-on: ubuntu-latest
+    steps:
+      - name: sleep
+        run: sleep 30
