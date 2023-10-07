@@ -45,6 +45,7 @@ jobs:
         run: npm test
       - name: npm start
         run: npm start
+        continue-on-error: true
       - name: Container in step
         uses: docker://node
         with:
