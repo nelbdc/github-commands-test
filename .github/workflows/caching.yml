@@ -32,3 +32,5 @@ jobs:
         with:
           name: artifact
           path: ${{ github.workspace }}
+          retention-days: 1
+          if-no-files-found: warning
