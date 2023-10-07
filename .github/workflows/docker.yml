@@ -3,7 +3,7 @@ on: push
 env:
   cache-name: "cache-node-modules"
   MONGODB_CONNECTION_PROTOCOL: mongodb
-  MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017
+  MONGODB_CLUSTER_ADDRESS: mongo:27017
   MONGODB_USERNAME: root
   MONGODB_PASSWORD: example
   MONGODB_DB_NAME: test
@@ -47,3 +47,11 @@ jobs:
         run: npm start
       - name: Container in step
         uses: docker://node
+        with:
+          entrypoint: /usr/local/bin/node
+          args: -p 2+3
+      - name: Container in step 2
+        uses: docker://node
+        with:
+          entrypoint: /usr/local/bin/node
+          args: -v

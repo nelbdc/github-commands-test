@@ -7,7 +7,8 @@ const dbPassword = process.env.MONGODB_PASSWORD;
 const dbName = process.env.MONGODB_DB_NAME;
 
 async function start() {
-    const uri = `${connectionProtocol}://${dbUser}:${dbPassword}@${clusterAddress}/?retryWrites=true&w=majority`;
+    // const uri = `${connectionProtocol}://${dbUser}:${dbPassword}@${clusterAddress}/?retryWrites=true&w=majority`;
+    const uri = `mongodb://root:example@127.0.0.1:27017`;
     const client = new MongoClient(uri);
 
     console.log('Trying to connect to db');
