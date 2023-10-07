@@ -1,0 +1,30 @@
+name: Reusable
+on:
+  workflow_call:
+    inputs:
+      name:
+        type: string
+        required: false
+        default: "N"
+      secrets:
+        type: string
+        required: true
+        description: This is a secret
+      executed:
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  reusable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: run-name
+        run: |
+          echo "This workflow has been executed by: ${{ inputs.name }}"
+          echo "Secret: ${{ inputs.secrets }}"
+          echo "Next actions: ${{ inputs.executed }}"
+      - name: Optional
+        if: inputs.executed
+        run: |
+          echo "This is a opcioanal steps"
