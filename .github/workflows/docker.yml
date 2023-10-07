@@ -63,3 +63,8 @@ jobs:
         with:
           entrypoint: cat
           args: text.txt
+      - name: Container in step 3
+        uses: docker://node
+        with:
+          entrypoint: ./script.sh
+          args: "args test"

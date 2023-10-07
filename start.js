@@ -25,7 +25,7 @@ async function start() {
     }
 
     console.log("Job finished");
-    return 1
+    process.exit(0);
 }
 
 start();

@@ -1,0 +1,2 @@
+echo "$ARGS"
+node -v
