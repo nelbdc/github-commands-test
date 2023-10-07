@@ -17,12 +17,17 @@ on:
     outputs:
       value:
         value: ${{ jobs.reusable.outputs.value  }}
+        description: This is a output
+    secrets:
+      any-secret:
+        required: true
+        description: This is a secret
 
 jobs:
   reusable:
     runs-on: ubuntu-latest
     outputs:
-      value: ${{ steps.output-step.outcome.output-step }}
+      value: ${{ steps.output-step.outputs.output-step }}
     steps:
       - name: run-name
         run: |
@@ -33,6 +38,6 @@ jobs:
         if: inputs.executed
         run: |
           echo "This is a opcioanal steps"
-      - name: outputs
+      - name: outputs-value
         id: output-step
-        run: echo "output-step=success" >> $GITHUB_OUTPUT
+        run: echo "output-step='success'" >> $GITHUB_OUTPUT

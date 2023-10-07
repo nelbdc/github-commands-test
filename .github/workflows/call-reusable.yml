@@ -7,11 +7,14 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
   call-reusable-workflow:
+    needs: [call-reusable]
     uses: ./.github/workflows/reusable.yml
     with:
       name: "Nelson"
       secrets: "secret"
       executed: true
+    secrets:
+      any-secret: "Hello"
   use-output:
     needs: call-reusable-workflow
     runs-on: ubuntu-latest
