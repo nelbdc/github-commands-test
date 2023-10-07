@@ -24,6 +24,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const axios  = request('axios');
+            const axios  = require('axios');
             const res = axios.get("https://icanhazdadjoke.com/", { headers:{ Accepts: 'text/plain' } })
             console.log(res.data)
