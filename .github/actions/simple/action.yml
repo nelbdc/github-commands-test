@@ -14,7 +14,5 @@ outputs:
 runs:
   using: "node20"
   main: "index.js"
-  pre-if: runner.os == "linux"
   pre: "setups.js"
   post: "cleanups.js"
-  post-if: runner.os == "linux"

@@ -1,23 +1,26 @@
-const core = require("@actions/core")
-const github = require("@actions/github")
+const core = require("@actions/core");
+const github = require("@actions/github");
 
-try {
-    core.error("Error");
-    core.debug("Debug");
-    core.info("Info");
+function run() {
+    try {
+        core.error("Error");
+        core.debug("Debug");
+        core.info("Info");
 
-    const name = core.getInput("greets");
+        const name = core.getInput("greets");
 
-    console.log(`Hello ${name}`);
+        console.log(`Hello ${name}`);
 
+        const time = new Date().toTimeString();
 
-    const time = new Date().toTimeString()
+        core.setOutput("time_greet", time);
 
-    core.setOutput("time_greet", time)
+        core.exportVariable("HELLO_TIME", time);
 
-    core.exportVariable("HELLO_TIME", time)
+    } catch (error) {
+        core.setFailed(error)
+    }
 
-} catch (error) {
-    core.setFailed(error)
 }
 
+run();
