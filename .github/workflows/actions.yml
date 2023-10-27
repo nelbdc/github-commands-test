@@ -3,8 +3,6 @@ on: push
 jobs:
   simple-actions:
     runs-on: ubuntu-latest
-    outputs:
-      values: ${{ steps.action.outputs.time_greet }}
     steps:
       - uses: actions/checkout@v4
       - name: execute action
@@ -13,6 +11,6 @@ jobs:
         with:
           greets: Nelson
       - name: Print greet time
-        run: echo ${{ steps.action.outputs.time_greet }}
+        run: echo '${{ steps.action.outputs.time_greet }}'
       - name: Logs ENV variables
-        run: echo ${{ steps.action.outputs.HELLO_TIME }}
+        run: echo '${{ steps.action.outputs.HELLO_TIME }}'
