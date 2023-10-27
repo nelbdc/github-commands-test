@@ -1,0 +1,20 @@
+name: js-actions
+description: simple actions
+author: Nelson
+inputs:
+  greets:
+    required: false
+    default: Nelson
+    description: This is field
+
+outputs:
+  time_greet:
+    description: time of the greeting
+
+runs:
+  using: "node20"
+  main: "main.js"
+  pre-if: runner.os == "linux"
+  pre: "setups.js"
+  post: "cleanups.js"
+  post-if: runner.os == "linux"
